@@ -1,24 +1,25 @@
 # Proof of Concept - Fleet Management Lite
 
-## Idea Reference
-- Number: 71
-- Title: Fleet Management Lite
-- Description: Tracks vehicle maintenance schedules and fuel usage for small fleets.
+## Scope
+- App category: Productivity
+- Entity model: Fleet Management Task
+- Deployable stack: Flask + SQLAlchemy + Gunicorn + Docker + CI
 
-## PoC Scope
-- App boots with Flask + SQLite persistence
-- CRUD flow works via web UI (`/`, `/items/new`, `/items/<id>/edit`)
-- API endpoints return valid JSON (`/api/health`, `/api/items`)
-- Deployability assets included (`Dockerfile`, `docker-compose.yml`, `Procfile`)
+## Dynamic Field Configuration
+- Owner: `owner` (text)
+- Priority (1-5): `priority` (number)
+- Operational Notes: `notes` (textarea)
 
-## Run Evidence (to capture)
+## Run Evidence Commands
 ```bash
 python app.py
 curl http://localhost:5000/api/health
-curl -X POST http://localhost:5000/api/items -H "Content-Type: application/json" -d '{"title": "Demo item", "details": "Created from PoC command", "status": "active"}'
-curl http://localhost:5000/api/items
+curl http://localhost:5000/api/schema
+curl -X POST http://localhost:5000/api/records   -H "Content-Type: application/json"   -d '{"title":"Demo Record","status":"in-progress","payload":{"owner":"Demo value","priority":12,"notes":"seed note"}}'
+curl http://localhost:5000/api/metrics
 ```
 
 ## Metadata
-- Generated UTC: 2026-03-24T15:35:11.733350+00:00
-- Status: Deployable full-template scaffold complete
+- Idea number: 36
+- Generated UTC: 2026-03-24T15:52:22.000810+00:00
+- Status: Phase-2 complete
